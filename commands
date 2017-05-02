@@ -1,0 +1,75 @@
+########## EPAM CLOUD commands ##########
+
+#Show list of regions (p - project name. (EPM-FARM))
+or2-describe-regions -p EPM-FARM -t EPAM
+
+#Show ahapes available (p - project name, -r region (EPAM-BY1))
+or2-describe-shapes -p EPM-FARM -r EPAM-BY1
+
+#To run instance (s -shape, i -image, c -1 pcs)
+or2-run-instances -p EPM-FARM -r EPAM-BY1 -s small -i CentOS7_64-bit -c 1
+
+
+
+## WORKING WITH INSTANCES ##
+#Stop (pause) instances:
+or2stop --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
+
+#Start (resume) instances:
+or2start --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
+
+#Reboot instances:
+or2reboot --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
+
+#Suspend instances:
+or2sus --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
+
+#Terminate instances:
+or2kill --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
+
+# To show instance status
+or2-describe-instances -p EPM-FARM -r EPAM-BY1 -i i-b10379ae
+
+# To show instance info
+or2din -p EPM-FARM -r EPAM-BY1 | grep Yahor
+
+# To set default projectname and region name. Not necessary to type -p -r
+cat default.properties
+
+## USER KEY CREATING ##
+or2-create-keypair -p EPM-FARM -r EPAM-BY1 -k egkey
+chmod 600 /home/student/maestro-cli/out/EPM-FARM/EPAM-BY1/egkey.pem
+or2-run-instances -p EPM-FARM -r EPAM-BY1 -s small -i CentOS7_64-bit -k egkey
+
+
+
+##### VOLUMES #####
+# Create and attach volume
+or2addattvol -p EPM-FARM -r EPAM-BY1 -s 2 -i i-b10379ae -d /dev/sdd
+
+# Mount volume
+mkfs.ext3 /dev/sdb
+mkdir /media/storage
+mount /dev/sdb /media/storage/
+
+# Resize volume
+or2resvol -p EPM-FARM -r EPAM-BY1 -v vol-89065fdb -s 4
+
+# Volume state
+or2-describe-volumes -p EPM-FARM -r EPAM-BY1 -i i-b10379ae
+
+
+##### TAGS #####
+
+# Show tags
+or2dtag  -p EPM-FARM -r EPAM-BY1 -i i-b10379ae
+
+# Set tag
+or2settag -p EPM-FARM -r EPAM-BY1 -i i-b10379ae -t prefix1:key1=egor
+
+# Show tags on volume
+or2dtag  -p EPM-FARM -r EPAM-BY1 -v vol-55a1f131
+
+# Remove tag
+or2deltag -p EPM-FARM -r EPAM-BY1 -i i-b10379ae -t prefix1:key1=EPAM
+
