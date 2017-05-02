@@ -73,3 +73,14 @@ or2dtag  -p EPM-FARM -r EPAM-BY1 -v vol-55a1f131
 # Remove tag
 or2deltag -p EPM-FARM -r EPAM-BY1 -i i-b10379ae -t prefix1:key1=EPAM
 
+##### AUDIT #####
+
+# Show logs by project
+or2audit -p EPM-FARM
+
+# Show logs by project and region
+or2audit -p EPM-FARM -r EPAM-BY1
+
+# Sort logs
+or2-audit -p EPM-FARM | grep Yahor
+
