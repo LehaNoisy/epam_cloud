@@ -96,3 +96,38 @@ or2audit -p EPM-FARM -r EPAM-BY1
 # Sort logs
 or2-audit -p EPM-FARM | grep Yahor
 
+
+########## IP ALLOCATING ##########
+# Allocate IP
+or2alsip -p EPM-FARM -r EPAM-BY2
+
+# Associate random IP
+or2assip -p EPM-FARM -r EPAM-BY2 -i ecsc00a000ab --any-ip-address
+
+# Associate defined IP
+or2assip -p EPM-FARM -r EPAM-BY2 -i ecsc00a000ab -a 10.6.222.199
+
+# Disassociate defined IP
+or2dissip -p EPM-FARM -r EPAM-BY2 –a 10.6.222.96
+
+# Release IP
+or2relsip -p EPM-FARM -r EPAM-BY2 –a 10.6.222.96
+
+########## AUTO CONFIGURATION SERVICE ##########
+# Get properties
+or2getp -p EPM-FARM -r EPAM-BY2 -i ecsc00a000ab
+
+# Set properties
+or2setp -p EPM-FARM -r EPAM-BY2 -i ecsc00a000ab -h java -c "version=1.7"
+
+# Get Chefmode
+or2dchef -p EPM-FARM -r EPAM-BY2 
+
+# Activate chef service
+or2ms -p EPM-FARM -r EPAM-BY2 –s chef --activate
+
+
+########## ZABBIX MONITORING ##########
+or2ms -p EPM-FARM -r EPAM-BY2 –s monitoring --activate
+ 
+
