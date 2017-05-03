@@ -158,3 +158,14 @@ or2dcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b
 or2gcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b -c checkpoint_2017_5_03_17_33_26_ECSC00106A10
 # Remove checkpoints
 or2delcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b -c checkpoint_2017_5_03_17_33_26_ECSC00106A10
+
+
+########## IMAGES ########## 
+# Create image
+or2cim -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b –n eg_img –d egor_image_test
+# Show info about image
+or2dim -p EPM-FARM -r EPAM-BY1 -i image_eg_img
+# Run with image
+or2run -p EPM-FARM -r EPAM-BY1 -s small -i image_eg_img
+# Delete image
+or2delim -p EPM-FARM -r EPAM-BY1 -i image_eg_img
