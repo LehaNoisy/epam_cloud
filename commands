@@ -10,8 +10,7 @@ or2-describe-shapes -p EPM-FARM -r EPAM-BY1
 or2-run-instances -p EPM-FARM -r EPAM-BY1 -s small -i CentOS7_64-bit -c 1
 
 
-
-## WORKING WITH INSTANCES ##
+########## WORKING WITH INSTANCES ##########
 #Stop (pause) instances:
 or2stop --project EPM-FARM --region EPAM-BY1 --instance i-4df81f79
 
@@ -36,11 +35,25 @@ or2din -p EPM-FARM -r EPAM-BY1 | grep Yahor
 # To set default projectname and region name. Not necessary to type -p -r
 cat default.properties
 
-## USER KEY CREATING ##
+
+########## USER KEY CREATING ##########
+# Show keys in region
+or2dkey -p EPM-FARM -r EPAM-BY2
+
+# Create keypair
 or2-create-keypair -p EPM-FARM -r EPAM-BY1 -k egkey
+
+# Change rights
 chmod 600 /home/student/maestro-cli/out/EPM-FARM/EPAM-BY1/egkey.pem
+
+# To run instance with key
 or2-run-instances -p EPM-FARM -r EPAM-BY1 -s small -i CentOS7_64-bit -k egkey
 
+# Remove keypair from region
+or2delkey -p EPM-FARM -r EPAM-BY1 -k egkey
+
+# To connect with key
+ssh -i /home/student/maestro-cli/out/EPM-FARM/EPAM-BY2/egkey.pem yahor_skrabkou@epam.com@ECSC00A000AB.epam.com
 
 
 ##### VOLUMES #####
@@ -60,7 +73,6 @@ or2-describe-volumes -p EPM-FARM -r EPAM-BY1 -i i-b10379ae
 
 
 ##### TAGS #####
-
 # Show tags
 or2dtag  -p EPM-FARM -r EPAM-BY1 -i i-b10379ae
 
@@ -73,8 +85,8 @@ or2dtag  -p EPM-FARM -r EPAM-BY1 -v vol-55a1f131
 # Remove tag
 or2deltag -p EPM-FARM -r EPAM-BY1 -i i-b10379ae -t prefix1:key1=EPAM
 
-##### AUDIT #####
 
+##### AUDIT #####
 # Show logs by project
 or2audit -p EPM-FARM
 
