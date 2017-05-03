@@ -38,7 +38,7 @@ cat default.properties
 
 ########## USER KEY CREATING ##########
 # Show keys in region
-or2dkey -p EPM-FARM -r EPAM-BY2
+or2dkey -p EPM-FARM -r EPAM-BY1
 
 # Create keypair
 or2-create-keypair -p EPM-FARM -r EPAM-BY1 -k egkey
@@ -126,8 +126,35 @@ or2dchef -p EPM-FARM -r EPAM-BY2
 # Activate chef service
 or2ms -p EPM-FARM -r EPAM-BY2 –s chef --activate
 
+# Remove property
+or2delp -p EPM-FARM -r EPAM-BY2 -i ecsc00a000ab -n java
+
 
 ########## ZABBIX MONITORING ##########
 or2ms -p EPM-FARM -r EPAM-BY2 –s monitoring --activate
- 
 
+
+########## LOG AGREGATOR ##########
+or2ms -p EPM-FARM -r EPAM-BY2 –s log --activate
+
+
+########## SCHEDULER ##########
+# Show schedules in project
+or2dsch -p EPM-FARM -r EPAM-BY2
+
+# Add schedule (-3 to time)
+or2addsch -p EPM-FARM -r EPAM-BY2 -a stop -c "0 20 16 ? * 1-5 *" -n eg_schedule_stop -i ecsc00a000ab
+or2addsch -p EPM-FARM -r EPAM-BY2 -a start -c "0 30 16 ? * 1-5 *" -n eg_schedule_start -i ecsc00a000ab
+
+# Delete schedule
+or2delsch -p EPM-FARM -r EPAM-BY2 -n eg_schedule_start
+ 
+########## CHECKPOINTS ########## 
+# Create checkpoint
+or2ccp -p EPM-FARM -r EPAM-BY2 –i i-4fb6e53b –d with_java
+# Show checkpoints
+or2dcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b
+# Revert to checkpoints
+or2gcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b -c checkpoint_2017_5_03_17_33_26_ECSC00106A10
+# Remove checkpoints
+or2delcp -p EPM-FARM -r EPAM-BY1 -i i-4fb6e53b -c checkpoint_2017_5_03_17_33_26_ECSC00106A10
