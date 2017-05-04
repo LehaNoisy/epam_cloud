@@ -169,3 +169,17 @@ or2dim -p EPM-FARM -r EPAM-BY1 -i image_eg_img
 or2run -p EPM-FARM -r EPAM-BY1 -s small -i image_eg_img
 # Delete image
 or2delim -p EPM-FARM -r EPAM-BY1 -i image_eg_img
+
+
+########## MAESTRO STACK ########## 
+# Show info about stacks
+or2dmstack -p EPM-FARM -r EPAM-BY1
+# Show info about defined stack
+or2dmsr -p EPM-FARM -r EPAM-BY1 -s eg_masterstack
+# Run maestro stack from local file
+or2rmstack -p EPM-FARM -r EPAM-BY1 -s "eg_masterstack" -m abcolute_path_to_template_file
+# Run maestro stack from a template stored on server
+or2rmstack -p EPM-FARM -r EPAM-BY1 -s eg_masterstack -t template_name
+# Delete defined stack
+or2delmstack -p EPM-FARM -r EPAM-BY1 -s eg_masterstack
+
