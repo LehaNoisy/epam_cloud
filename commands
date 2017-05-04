@@ -182,4 +182,6 @@ or2rmstack -p EPM-FARM -r EPAM-BY1 -s "eg_masterstack" -m abcolute_path_to_templ
 or2rmstack -p EPM-FARM -r EPAM-BY1 -s eg_masterstack -t template_name
 # Delete defined stack
 or2delmstack -p EPM-FARM -r EPAM-BY1 -s eg_masterstack
+# To validate template
+or2vmst -p EPM-FARM -r EPAM-BY1 -m /home/student/clouds/maestrostack.json
 
